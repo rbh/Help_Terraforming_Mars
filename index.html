@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Help Terraforming Mars</title>
+    <meta name="description" content="Keep track of resources when playing the board game Terraforming Mars">
+    <meta name="author" content="rbh">
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="icons/Mars-512.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="57x57" href="icons/Mars-57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icons/Mars-60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/Mars-72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/Mars-76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icons/Mars-114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/Mars-120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/Mars-144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/Mars-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/Mars-180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="icons/Mars-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/Mars-32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/Mars-96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/Mars-16.png">
+    <meta name="msapplication-TileImage" content="icons/Mars-144.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="Help_Terraforming_Mars.webmanifest">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class='app_item'   id='app_title'>Help Terraforming Mars</div>
+    <div class='app_item'   id='app_resh'>Resources</div>
+    <div class='app_item'   id='app_prod'>Production</div>
+    <div class='app_item'   id='app_sup'>Supply</div>
+    <div class='app_item'   id='app_rm'>Megacredits</div>
+    <div class='app_button' id='app_rmpm'>-</div>
+    <div class='app_item'   id='app_rmp'>1</div>
+    <div class='app_button' id='app_rmpp'>+</div>
+    <div class='app_button' id='app_rmsm'>-</div>
+    <div class='app_item'   id='app_rms'>30</div>
+    <div class='app_button' id='app_rmsp'>+</div>
+    <div class='app_item'   id='app_rs'>Steel</div>
+    <div class='app_button' id='app_rspm'>-</div>
+    <div class='app_item'   id='app_rsp'>1</div>
+    <div class='app_button' id='app_rspp'>+</div>
+    <div class='app_button' id='app_rssm'>-</div>
+    <div class='app_item'   id='app_rss'>0</div>
+    <div class='app_button' id='app_rssp'>+</div>
+    <div class='app_item'   id='app_rt'>Titanium</div>
+    <div class='app_button' id='app_rtpm'>-</div>
+    <div class='app_item'   id='app_rtp'>1</div>
+    <div class='app_button' id='app_rtpp'>+</div>
+    <div class='app_button' id='app_rtsm'>-</div>
+    <div class='app_item'   id='app_rts'>0</div>
+    <div class='app_button' id='app_rtsp'>+</div>
+    <div class='app_item'   id='app_rp'>Plants</div>
+    <div class='app_button' id='app_rppm'>-</div>
+    <div class='app_item'   id='app_rpp'>1</div>
+    <div class='app_button' id='app_rppp'>+</div>
+    <div class='app_button' id='app_rpsm'>-</div>
+    <div class='app_item'   id='app_rps'>0</div>
+    <div class='app_button' id='app_rpsp'>+</div>
+    <div class='app_item'   id='app_re'>Energy</div>
+    <div class='app_button' id='app_repm'>-</div>
+    <div class='app_item'   id='app_rep'>1</div>
+    <div class='app_button' id='app_repp'>+</div>
+    <div class='app_button' id='app_resm'>-</div>
+    <div class='app_item'   id='app_res'>0</div>
+    <div class='app_button' id='app_resp'>+</div>
+    <div class='app_item'   id='app_rh'>Heat</div>
+    <div class='app_button' id='app_rhpm'>-</div>
+    <div class='app_item'   id='app_rhp'>1</div>
+    <div class='app_button' id='app_rhpp'>+</div>
+    <div class='app_button' id='app_rhsm'>-</div>
+    <div class='app_item'   id='app_rhs'>0</div>
+    <div class='app_button' id='app_rhsp'>+</div>
+    <div class='app_item'   id='app_trh'>Terraforming Rating</div>
+    <div class='app_button' id='app_trm'>-</div>
+    <div class='app_item'   id='app_tr'>20</div>
+    <div class='app_button' id='app_trp'>+</div>
+    <div class='app_item'   id='app_gh'>Generation</div>
+    <div class='app_item'   id='app_g'>1</div>
+    <div class='app_button' id='app_next'>Next</div>
+    <div class='app_item'   id='app_pay'>Paying</div>
+    <div class='app_item'   id='app_pmh'>Megacredits</div>
+    <div class='app_button' id='app_pmm'>-</div>
+    <div class='app_item'   id='app_pm'>0</div>
+    <div class='app_button' id='app_pmp'>+</div>
+    <div class='app_item'   id='app_psh'>Steel</div>
+    <div class='app_button' id='app_psm'>-</div>
+    <div class='app_item'   id='app_ps'>0</div>
+    <div class='app_button' id='app_psp'>+</div>
+    <div class='app_item'   id='app_psx'>×2</div>
+    <div class='app_item'   id='app_psv'>0</div>
+    <div class='app_item'   id='app_pth'>Titanium</div>
+    <div class='app_button' id='app_ptm'>-</div>
+    <div class='app_item'   id='app_pt'>0</div>
+    <div class='app_button' id='app_ptp'>+</div>
+    <div class='app_item'   id='app_ptx'>×3</div>
+    <div class='app_item'   id='app_ptv'>0</div>
+    <div class='app_item'   id='app_ptoh'>Total</div>
+    <div class='app_button' id='app_cncl'>Cancel</div>
+    <div class='app_item'   id='app_pto'>0</div>
+    <div class='app_button' id='app_ok'>Ok</div>
+  </body>
+</html>
