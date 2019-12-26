@@ -13,7 +13,9 @@ function resize_handler() {
     var H = document.documentElement.clientHeight;
     var M;
     if (W < H) {
-	console.log('portrait');
+	document.getElementById('app_pmh').style.display = 'flex';
+	document.getElementById('app_psh').style.display = 'flex';
+	document.getElementById('app_pth').style.display = 'flex';
 	document.body.classList.remove('landscape');
 	document.body.classList.add('portrait');
 	if ( W/9 < H/15 ) {
@@ -22,7 +24,9 @@ function resize_handler() {
 	    M = H/15;
 	}
     } else {
-	console.log('landscape');
+	document.getElementById('app_pmh').style.display = 'none';
+	document.getElementById('app_psh').style.display = 'none';
+	document.getElementById('app_pth').style.display = 'none';
 	document.body.classList.remove('portrait');
 	document.body.classList.add('landscape');
 	if ( W/17 < H/8 ) {

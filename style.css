@@ -22,44 +22,46 @@ body {
 }
 
 .portrait {
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(6, 1fr) 0.4fr repeat(5,1fr);
     grid-template-rows: repeat(15, 1fr);
     grid-template-areas:
-        'title title title title title title title title title'
-	'resh  resh  resh  prod  prod  prod  sup   sup   sup'
-	'rm    rm    rm    rmpm  rmp   rmpp  rmsm  rms   rmsp'
-	'rs    rs    rs    rspm  rsp   rspp  rssm  rss   rssp'
-	'rt    rt    rt    rtpm  rtp   rtpp  rtsm  rts   rtsp'
-	'rp    rp    rp    rppm  rpp   rppp  rpsm  rps   rpsp'
-	're    re    re    repm  rep   repp  resm  res   resp'
-	'rh    rh    rh    rhpm  rhp   rhpp  rhsm  rhs   rhsp'
-	'trh   trh   trh   trh   trh   trh   trm   tr    trp'
-	'gh    gh    gh    gh    gh    gh    gh    g     next'
-	'pay   pay   pay   pay   pay   pay   pay   pay   pay'
-	'pmh   pmh   pmh   pmh   pmh   pmh   pmm   pm    pmp'
-	'psh   psh   psh   psm   ps    psp   psx   psv   .'
-	'pth   pth   pth   ptm   pt    ptp   ptx   ptv   .'
-	'ptoh  ptoh  ptoh  ptoh  ptoh  ptoh  cncl  pto   ok';
+        'title title title title title title title title title title title title'
+	'resh  resh  resh  prod  prod  prod  .     sup   sup   sup   sup   sup  '
+	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5'
+	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5'
+	'rt    rt    rt    rtpm  rtp   rtpp  .     rtsm5 rtsm  rts   rtsp  rtsp5'
+	'rp    rp    rp    rppm  rpp   rppp  .     rpsm5 rpsm  rps   rpsp  rpsp5'
+	're    re    re    repm  rep   repp  .     resm5 resm  res   resp  resp5'
+	'rh    rh    rh    rhpm  rhp   rhpp  .     rhsm5 rhsm  rhs   rhsp  rhsp5'
+	'pay   pay   pay   pay   pay   pay   pay   pay   pay   pay   pay   pay  '
+	'pmh   pmh   pmh   pmh   pmh   pmh   .     pmm5  pmm   pm    pmp   pmp5 '
+	'psh   psh   psh   psm   ps    psp   .     psx   psx   psv   .     .    '
+	'pth   pth   pth   ptm   pt    ptp   .     ptx   ptx   ptv   .     .    '
+	'ptoh  ptoh  ptoh  ptoh  ptoh  ptoh  .     cncl  cncl  pto   ok    ok   '
+	'trh   trh   trh   trh   trh   trh   trh   trh   trm   tr    trp   .    '
+	'gh    gh    gh    gh    gh    gh    gh    gh    gh    g     next  next ';
 }
 
 .landscape {
-    grid-template-columns: repeat(17, 1fr);
+    grid-template-columns: repeat(6, 1fr) 0.4fr repeat(5, 1fr) 0.4fr repeat(7, 1fr);
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas:
-        'title title title title title title title title title title title title title title title title title'
-	'resh  resh  resh  prod  prod  prod  sup   sup   sup   trh   trh   trh   trh   trh   trm   tr    trp'
-	'rm    rm    rm    rmpm  rmp   rmpp  rmsm  rms   rmsp  gh    gh    gh    gh    gh    gh    g     next'
-	'rs    rs    rs    rspm  rsp   rspp  rssm  rss   rssp  pay   pay   pay   pay   pay   pay   pay   pay'
-	'rt    rt    rt    rtpm  rtp   rtpp  rtsm  rts   rtsp  pmh   pmh   pmh   pmh   pmh   pmm   pm    pmp'
-	'rp    rp    rp    rppm  rpp   rppp  rpsm  rps   rpsp  psh   psh   psm   ps    psp   psx   psv   .'
-	're    re    re    repm  rep   repp  resm  res   resp  pth   pth   ptm   pt    ptp   ptx   ptv   .'
-	'rh    rh    rh    rhpm  rhp   rhpp  rhsm  rhs   rhsp  ptoh  ptoh  ptoh  ptoh  ptoh  cncl  pto   ok';
-}
+        'title title title title title title title title title title title title title title title title title title title title'
+	'resh  resh  resh  prod  prod  prod  .     sup   sup   sup   sup   sup   .     pay   pay   pay   pay   pay   pay   pay  '
+	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5 .     .     .     pmm5  pmm   pm    pmp   pmp5 '
+	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5 .     psm   ps    psp   psx   psv   .     .    '
+	'rt    rt    rt    rtpm  rtp   rtpp  .     rtsm5 rtsm  rts   rtsp  rtsp5 .     ptm   pt    ptp   ptx   ptv   .     .    '
+	'rp    rp    rp    rppm  rpp   rppp  .     rpsm5 rpsm  rps   rpsp  rpsp5 .     ptoh  ptoh  cncl  cncl  pto   ok    ok   '
+	're    re    re    repm  rep   repp  .     resm5 resm  res   resp  resp5 .     trh   trh   trh   trm   tr    trp   .    '
+	'rh    rh    rh    rhpm  rhp   rhpp  .     rhsm5 rhsm  rhs   rhsp  rhsp5 .     gh    gh    gh    gh    g     next  next ';
+                                                                           
+}									   
 
 .app_item {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: rgba(0, 0, 0, 1);
 }
 
@@ -98,9 +100,11 @@ body {
 #app_rmpm { grid-area: rmpm; }
 #app_rmp { grid-area: rmp; }
 #app_rmpp { grid-area: rmpp; }
+#app_rmsm5 { grid-area: rmsm5; }
 #app_rmsm { grid-area: rmsm; }
 #app_rms { grid-area: rms; }
 #app_rmsp { grid-area: rmsp; }
+#app_rmsp5 { grid-area: rmsp5; }
 #app_gh { grid-area: gh; }
 #app_g { grid-area: g; }
 #app_next { grid-area: next; }
@@ -108,28 +112,36 @@ body {
 #app_rspm { grid-area: rspm; }
 #app_rsp { grid-area: rsp; }
 #app_rspp { grid-area: rspp; }
+#app_rssm5 { grid-area: rssm5; }
 #app_rssm { grid-area: rssm; }
 #app_rss { grid-area: rss; }
 #app_rssp { grid-area: rssp; }
+#app_rssp5 { grid-area: rssp5; }
 #app_pay { grid-area: pay; }
 #app_rt { grid-area: rt; }
 #app_rtpm { grid-area: rtpm; }
 #app_rtp { grid-area: rtp; }
 #app_rtpp { grid-area: rtpp; }
+#app_rtsm5 { grid-area: rtsm5; }
 #app_rtsm { grid-area: rtsm; }
 #app_rts { grid-area: rts; }
 #app_rtsp { grid-area: rtsp; }
+#app_rtsp5 { grid-area: rtsp5; }
 #app_pmh { grid-area: pmh; }
+#app_pmm5 { grid-area: pmm5; }
 #app_pmm { grid-area: pmm; }
 #app_pm { grid-area: pm; }
 #app_pmp { grid-area: pmp; }
+#app_pmp5 { grid-area: pmp5; }
 #app_rp { grid-area: rp; }
 #app_rppm { grid-area: rppm; }
 #app_rpp { grid-area: rpp; }
 #app_rppp { grid-area: rppp; }
+#app_rpsm5 { grid-area: rpsm5; }
 #app_rpsm { grid-area: rpsm; }
 #app_rps { grid-area: rps; }
 #app_rpsp { grid-area: rpsp; }
+#app_rpsp5 { grid-area: rpsp5; }
 #app_psh { grid-area: psh; }
 #app_psm { grid-area: psm; }
 #app_ps { grid-area: ps; }
@@ -140,9 +152,11 @@ body {
 #app_repm { grid-area: repm; }
 #app_rep { grid-area: rep; }
 #app_repp { grid-area: repp; }
+#app_resm5 { grid-area: resm5; }
 #app_resm { grid-area: resm; }
 #app_res { grid-area: res; }
 #app_resp { grid-area: resp; }
+#app_resp5 { grid-area: resp5; }
 #app_pth { grid-area: pth; }
 #app_ptm { grid-area: ptm; }
 #app_pt { grid-area: pt; }
@@ -153,9 +167,11 @@ body {
 #app_rhpm { grid-area: rhpm; }
 #app_rhp { grid-area: rhp; }
 #app_rhpp { grid-area: rhpp; }
+#app_rhsm5 { grid-area: rhsm5; }
 #app_rhsm { grid-area: rhsm; }
 #app_rhs { grid-area: rhs; }
 #app_rhsp { grid-area: rhsp; }
+#app_rhsp5 { grid-area: rhsp5; }
 #app_ptoh { grid-area: ptoh; }
 #app_cncl { grid-area: cncl; }
 #app_pto { grid-area: pto; }
