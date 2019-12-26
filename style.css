@@ -26,7 +26,7 @@ body {
     grid-template-rows: repeat(15, 1fr);
     grid-template-areas:
         'title title title title title title title title title title title title'
-	'resh  resh  resh  prod  prod  prod  .     sup   sup   sup   sup   sup  '
+	'.     .     .     prod  prod  prod  .     sup   sup   sup   sup   sup  '
 	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5'
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5'
 	'rt    rt    rt    rtpm  rtp   rtpp  .     rtsm5 rtsm  rts   rtsp  rtsp5'
@@ -47,7 +47,7 @@ body {
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas:
         'title title title title title title title title title title title title title title title title title title title title'
-	'resh  resh  resh  prod  prod  prod  .     sup   sup   sup   sup   sup   .     pay   pay   pay   pay   pay   pay   pay  '
+	'.     .     .     prod  prod  prod  .     sup   sup   sup   sup   sup   .     pay   pay   pay   pay   pay   pay   pay  '
 	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5 .     .     .     pmm5  pmm   pm    pmp   pmp5 '
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5 .     psm   ps    psp   psx   psv   .     .    '
 	'rt    rt    rt    rtpm  rtp   rtpp  .     rtsm5 rtsm  rts   rtsp  rtsp5 .     ptm   pt    ptp   ptx   ptv   .     .    '
@@ -75,7 +75,7 @@ body {
 }
 
 .disabled {
-    color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.3);
 }
 
 .pressed {
@@ -87,9 +87,9 @@ body {
     color: #ffffff;
     background-color: #0000bf;
     font-weight: old;
+    font-size: 120%;
 }
 
-#app_resh { grid-area: resh; }
 #app_prod { grid-area: prod; }
 #app_sup { grid-area: sup; }
 #app_trh { grid-area: trh; }
