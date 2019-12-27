@@ -523,6 +523,61 @@ function setup_generation_button() {
 }
 
 
+function activate_popup() {
+    document.getElementById('popup').style.display = 'block';
+}
+
+
+function deactivate_popup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+
+function reset() {
+    document.getElementById('app_rmp').innerHTML = 1;
+    document.getElementById('app_rms').innerHTML = 30;
+    document.getElementById('app_rsp').innerHTML = 1;
+    document.getElementById('app_rss').innerHTML = 0;
+    document.getElementById('app_rtp').innerHTML = 1;
+    document.getElementById('app_rts').innerHTML = 0;
+    document.getElementById('app_rpp').innerHTML = 1;
+    document.getElementById('app_rps').innerHTML = 0;
+    document.getElementById('app_rep').innerHTML = 1;
+    document.getElementById('app_res').innerHTML = 0;
+    document.getElementById('app_rhp').innerHTML = 1;
+    document.getElementById('app_rhs').innerHTML = 0;
+    document.getElementById('app_tr').innerHTML = 20;
+    document.getElementById('app_g').innerHTML = 1;
+    document.getElementById('app_pm').innerHTML = 0;
+    document.getElementById('app_ps').innerHTML = 0;
+    document.getElementById('app_psv').innerHTML = 0;
+    document.getElementById('app_pt').innerHTML = 0;
+    document.getElementById('app_ptv').innerHTML = 0;
+    document.getElementById('app_pto').innerHTML = 0;
+    document.getElementById('app_next').classList.remove('disabled');
+    disable_all_resource_buttons();
+    enable_all_resource_buttons();
+    disable_paying_buttons();
+    enable_paying_buttons();
+    disable_terraforming_rating_buttons();
+    enable_terraforming_rating_buttons();
+}
+
+
+function setup_popup() {
+    document.getElementById('popup_no').addEventListener('click', function(e) {
+	deactivate_popup();
+    });
+    document.getElementById('popup_yes').addEventListener('click', function(e) {
+	reset();
+	deactivate_popup();
+    });
+    document.getElementById('app_reset').addEventListener('click', function(e) {
+	activate_popup();
+    });
+}
+
+
 disable_all_resource_buttons();
 enable_all_resource_buttons();
 setup_all_resource_buttons();
@@ -537,3 +592,4 @@ setup_terraforming_rating_buttons();
 
 setup_generation_button();
 
+setup_popup();

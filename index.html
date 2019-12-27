@@ -30,7 +30,9 @@
     <script src="app.js" defer></script>
   </head>
   <body>
+    <div class='app_item'   id='app_conf' ></div>
     <div class='app_item'   id='app_title'>Help Terraforming Mars</div>
+    <div class='app_item'   id='app_reset'>Reset</div>
     <div class='app_item'   id='app_prod' >Production</div>
     <div class='app_item'   id='app_sup'  >Supply</div>
     <div class='app_item'   id='app_rm'   >Mega&shy;credits</div>
@@ -118,5 +120,14 @@
     <div class='app_button disabled' id='app_cncl' >Cancel</div>
     <div class='app_item'   id='app_pto'  >0</div>
     <div class='app_button disabled' id='app_ok'   >Ok</div>
+    <div id='popup'>
+      <div id='popup_box'>
+	<div id='popup_text'>
+	  Are you sure you want to reset?
+	</div>
+	<div id='popup_no'>No</div>
+	<div id='popup_yes'>Yes</div>
+      </div>
+    </div>
   </body>
 </html>
