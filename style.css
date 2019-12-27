@@ -72,6 +72,7 @@ body {
     color: rgba(0, 0, 0, 1);
     background-color: #e0e0ff;
     border: 1px solid #000000;
+    touch-action: manipulation;
 }
 
 .disabled {
