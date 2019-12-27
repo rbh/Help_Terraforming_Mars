@@ -38,7 +38,7 @@ body {
 	'psh   psh   psh   psm   ps    psp   .     psx   psx   psv   .     .    '
 	'pth   pth   pth   ptm   pt    ptp   .     ptx   ptx   ptv   .     .    '
 	'ptoh  ptoh  ptoh  ptoh  ptoh  ptoh  .     cncl  cncl  pto   ok    ok   '
-	'trh   trh   trh   trh   trh   trh   trh   trh   trm   tr    trp   .    '
+	'trh   trh   trh   trh   trh   trh   trh   trh   trm   tr    trp   trp5 '
 	'gh    gh    gh    gh    gh    gh    gh    gh    gh    g     next  next ';
 }
 
@@ -52,7 +52,7 @@ body {
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5 .     psm   ps    psp   psx   psv   .     .    '
 	'rt    rt    rt    rtpm  rtp   rtpp  .     rtsm5 rtsm  rts   rtsp  rtsp5 .     ptm   pt    ptp   ptx   ptv   .     .    '
 	'rp    rp    rp    rppm  rpp   rppp  .     rpsm5 rpsm  rps   rpsp  rpsp5 .     ptoh  ptoh  cncl  cncl  pto   ok    ok   '
-	're    re    re    repm  rep   repp  .     resm5 resm  res   resp  resp5 .     trh   trh   trh   trm   tr    trp   .    '
+	're    re    re    repm  rep   repp  .     resm5 resm  res   resp  resp5 .     trh   trh   trh   trm   tr    trp   trp5 '
 	'rh    rh    rh    rhpm  rhp   rhpp  .     rhsm5 rhsm  rhs   rhsp  rhsp5 .     gh    gh    gh    gh    g     next  next ';
                                                                            
 }									   
@@ -96,6 +96,7 @@ body {
 #app_trm { grid-area: trm; }
 #app_tr { grid-area: tr; }
 #app_trp { grid-area: trp; }
+#app_trp5 { grid-area: trp5; }
 #app_rm { grid-area: rm; }
 #app_rmpm { grid-area: rmpm; }
 #app_rmp { grid-area: rmp; }
