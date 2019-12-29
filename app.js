@@ -209,6 +209,55 @@ function setup_all_resource_buttons() {
 }
 
 
+function disable_terraforming_rating_buttons() {
+    document.getElementById('app_trm').classList.add('disabled');
+    document.getElementById('app_trp').classList.add('disabled');
+    document.getElementById('app_trp5').classList.add('disabled');
+}
+
+
+function enable_terraforming_rating_buttons() {
+    document.getElementById('app_trm').classList.remove('disabled');
+    document.getElementById('app_trp').classList.remove('disabled');
+    document.getElementById('app_trp5').classList.remove('disabled');
+}
+
+
+function setup_terraforming_rating_buttons() {
+    let trm = document.getElementById('app_trm');
+    let trp = document.getElementById('app_trp');
+    let trp5 = document.getElementById('app_trp5');
+    let tr = document.getElementById('app_tr');
+
+    trm.addEventListener('click', function(e) {
+	if (! trm.classList.contains('disabled')) {
+	    var v = parseInt(tr.innerHTML);
+	    v--;
+	    if (v == 0) {
+		trm.classList.add('disabled');
+	    }
+	    tr.innerHTML = v;
+	}
+    });
+    trp.addEventListener('click', function(e) {
+	if (! trp.classList.contains('disabled')) {
+	    var v = parseInt(tr.innerHTML);
+	    v++;
+	    trm.classList.remove('disabled');
+	    tr.innerHTML = v;
+	}
+    });
+    trp5.addEventListener('click', function(e) {
+	if (! trp5.classList.contains('disabled')) {
+	    var v = parseInt(tr.innerHTML);
+	    v += 5;
+	    trm.classList.remove('disabled');
+	    tr.innerHTML = v;
+	}
+    });
+}
+
+
 function disable_paying_buttons() {
     var x;
     for (x of [ 'pmm5', 'pmm', 'pmp', 'pmp5', 'psm', 'psp', 'ptm', 'ptp', 'cncl', 'ok' ]) {
@@ -432,7 +481,7 @@ function setup_paying_buttons() {
 		    document.getElementById('app_p' + r + 'v').innerHTML = 0;
 		}
 	    }
-	    pto.innerHTML = 0;
+	    update_total();
 	    disable_all_resource_buttons();
 	    enable_all_resource_buttons();
 	    disable_paying_buttons();
@@ -440,55 +489,6 @@ function setup_paying_buttons() {
 	    cncl.classList.add('disabled');
 	    ok.classList.add('disabled');
 	    next.classList.remove('disabled');
-	}
-    });
-}
-
-
-function disable_terraforming_rating_buttons() {
-    document.getElementById('app_trm').classList.add('disabled');
-    document.getElementById('app_trp').classList.add('disabled');
-    document.getElementById('app_trp5').classList.add('disabled');
-}
-
-
-function enable_terraforming_rating_buttons() {
-    document.getElementById('app_trm').classList.remove('disabled');
-    document.getElementById('app_trp').classList.remove('disabled');
-    document.getElementById('app_trp5').classList.remove('disabled');
-}
-
-
-function setup_terraforming_rating_buttons() {
-    let trm = document.getElementById('app_trm');
-    let trp = document.getElementById('app_trp');
-    let trp5 = document.getElementById('app_trp5');
-    let tr = document.getElementById('app_tr');
-
-    trm.addEventListener('click', function(e) {
-	if (! trm.classList.contains('disabled')) {
-	    var v = parseInt(tr.innerHTML);
-	    v--;
-	    if (v == 0) {
-		trm.classList.add('disabled');
-	    }
-	    tr.innerHTML = v;
-	}
-    });
-    trp.addEventListener('click', function(e) {
-	if (! trp.classList.contains('disabled')) {
-	    var v = parseInt(tr.innerHTML);
-	    v++;
-	    trm.classList.remove('disabled');
-	    tr.innerHTML = v;
-	}
-    });
-    trp5.addEventListener('click', function(e) {
-	if (! trp5.classList.contains('disabled')) {
-	    var v = parseInt(tr.innerHTML);
-	    v += 5;
-	    trm.classList.remove('disabled');
-	    tr.innerHTML = v;
 	}
     });
 }
