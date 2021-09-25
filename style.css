@@ -25,7 +25,7 @@ body {
     grid-template-columns: repeat(6, 1fr) 0.4fr repeat(5,1fr);
     grid-template-rows: repeat(15, 1fr);
     grid-template-areas:
-        'conf  title title title title title title title title title title reset'
+        'undo  title title title title title title title title title title reset'
 	'.     .     .     prod  prod  prod  .     sup   sup   sup   sup   sup  '
 	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5'
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5'
@@ -38,7 +38,7 @@ body {
 	'psh   psh   psh   psm   ps    psp   .     psx   psx   psv   .     .    '
 	'pth   pth   pth   ptm   pt    ptp   .     ptx   ptx   ptv   .     .    '
 	'ptoh  ptoh  ptoh  ptoh  ptoh  ptoh  .     cncl  cncl  pto   ok    ok   '
-	'trh   trh   trh   trh   trh   trh   trh   trh   trm   tr    trp   trp5 '
+	'trh   trh   trh   trh   trh   trh   trh   trh   trm   tr    trp   .    '
 	'gh    gh    gh    gh    gh    gh    gh    gh    gh    g     next  next ';
 }
 
@@ -46,13 +46,13 @@ body {
     grid-template-columns: repeat(6, 1fr) 0.4fr repeat(5, 1fr) 0.4fr repeat(7, 1fr);
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas:
-        'conf  title title title title title title title title title title title title title title title title title title reset'
+        'undo  title title title title title title title title title title title title title title title title title title reset'
 	'.     .     .     prod  prod  prod  .     sup   sup   sup   sup   sup   .     pay   pay   pay   pay   pay   pay   pay  '
 	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5 .     .     .     pmm5  pmm   pm    pmp   pmp5 '
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5 .     psm   ps    psp   psx   psv   .     .    '
 	'rt    rt    rt    rtpm  rtp   rtpp  .     rtsm5 rtsm  rts   rtsp  rtsp5 .     ptm   pt    ptp   ptx   ptv   .     .    '
 	'rp    rp    rp    rppm  rpp   rppp  .     rpsm5 rpsm  rps   rpsp  rpsp5 .     ptoh  ptoh  cncl  cncl  pto   ok    ok   '
-	're    re    re    repm  rep   repp  .     resm5 resm  res   resp  resp5 .     trh   trh   trh   trm   tr    trp   trp5 '
+	're    re    re    repm  rep   repp  .     resm5 resm  res   resp  resp5 .     trh   trh   trh   trm   tr    trp   .    '
 	'rh    rh    rh    rhpm  rhp   rhpp  .     rhsm5 rhsm  rhs   rhsp  rhsp5 .     gh    gh    gh    gh    g     next  next ';
                                                                            
 }									   
@@ -92,8 +92,8 @@ body {
     font-size: 120%;
 }
 
-#app_conf {
-    grid-area: conf;
+#app_undo {
+    grid-area: undo;
     background-color: #0000bf;
     color: rgba(128, 128, 128, 1);
 }

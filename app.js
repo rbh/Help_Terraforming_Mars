@@ -8,6 +8,39 @@ if ('serviceWorker' in navigator) {
 };
 
 
+var states = [];
+var last_ids = [];
+
+function save_state(id) {
+    if (last_ids.length == 0 || id != last_ids[last_ids.length-1]) {
+	last_ids.push(id);
+	var state = {};
+	for (x of document.getElementsByClassName('app_item')) {
+	    state[x.id] = x.innerHTML;
+	}
+	states.push(state);
+	document.getElementById('app_undo').classList.remove('disabled');
+    }
+}
+
+
+function undo() {
+    let u = document.getElementById('app_undo');  // Undo button
+    if (! u.classList.contains('disabled')) {
+	if (states.length > 0) {
+	    var state = states.pop();
+	    last_ids.pop();
+	    for (id in state) {
+		document.getElementById(id).innerHTML = state[id];
+	    }
+	    if (states.length == 0) {
+		u.classList.add('disabled');
+	    }
+	}
+    }
+}
+
+
 // Make the app responsive.
 function resize_handler() {
     var W = document.documentElement.clientWidth;
@@ -131,6 +164,7 @@ function setup_resource_buttons(r, minimum=0) {
     
     pp.addEventListener('click', function(e) {
 	if (! pp.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(p.innerHTML);
 	    v++;
 	    pm.classList.remove('disabled');
@@ -139,6 +173,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     pm.addEventListener('click', function(e) {
 	if (! pm.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(p.innerHTML);
 	    v--;
 	    if (v == minimum) {
@@ -149,6 +184,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sp.addEventListener('click', function(e) {
 	if (! sp.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(s.innerHTML);
 	    v++;
 	    sm.classList.remove('disabled');
@@ -161,6 +197,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sp5.addEventListener('click', function(e) {
 	if (! sp5.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(s.innerHTML);
 	    v += 5;
 	    sm.classList.remove('disabled');
@@ -171,6 +208,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sm.addEventListener('click', function(e) {
 	if (! sm.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(s.innerHTML);
 	    v--;
 	    if (v < 5) {
@@ -185,6 +223,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sm5.addEventListener('click', function(e) {
 	if (! sm5.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(s.innerHTML);
 	    v -= 5;
 	    if (v < 5) {
@@ -212,25 +251,23 @@ function setup_all_resource_buttons() {
 function disable_terraforming_rating_buttons() {
     document.getElementById('app_trm').classList.add('disabled');
     document.getElementById('app_trp').classList.add('disabled');
-    document.getElementById('app_trp5').classList.add('disabled');
 }
 
 
 function enable_terraforming_rating_buttons() {
     document.getElementById('app_trm').classList.remove('disabled');
     document.getElementById('app_trp').classList.remove('disabled');
-    document.getElementById('app_trp5').classList.remove('disabled');
 }
 
 
 function setup_terraforming_rating_buttons() {
     let trm = document.getElementById('app_trm');
     let trp = document.getElementById('app_trp');
-    let trp5 = document.getElementById('app_trp5');
     let tr = document.getElementById('app_tr');
 
     trm.addEventListener('click', function(e) {
 	if (! trm.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(tr.innerHTML);
 	    v--;
 	    if (v == 0) {
@@ -241,16 +278,9 @@ function setup_terraforming_rating_buttons() {
     });
     trp.addEventListener('click', function(e) {
 	if (! trp.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    var v = parseInt(tr.innerHTML);
 	    v++;
-	    trm.classList.remove('disabled');
-	    tr.innerHTML = v;
-	}
-    });
-    trp5.addEventListener('click', function(e) {
-	if (! trp5.classList.contains('disabled')) {
-	    var v = parseInt(tr.innerHTML);
-	    v += 5;
 	    trm.classList.remove('disabled');
 	    tr.innerHTML = v;
 	}
@@ -307,6 +337,7 @@ function setup_paying_buttons() {
     let pto = document.getElementById('app_pto');    // Paying, total
     let ok = document.getElementById('app_ok');      // Ok button
     let next = document.getElementById('app_next');  // Next (generation) button
+    let u = document.getElementById('app_undo');  // Undo button
 
     let update_total = function() {
 	var total = parseInt(pm.innerHTML) + parseInt(psv.innerHTML) + parseInt(ptv.innerHTML);
@@ -317,12 +348,17 @@ function setup_paying_buttons() {
 	    cncl.classList.add('disabled');
 	    ok.classList.add('disabled');
 	    next.classList.remove('disabled');
+	    states.pop();
+	    if (states.length > 0) {
+		u.classList.remove('disabled');
+	    }
 	} else {
 	    disable_all_resource_buttons();
 	    disable_terraforming_rating_buttons();
 	    cncl.classList.remove('disabled');
 	    ok.classList.remove('disabled');
 	    next.classList.add('disabled');
+	    u.classList.add('disabled');
 	}
     };
     
@@ -366,6 +402,9 @@ function setup_paying_buttons() {
     });
     pmp.addEventListener('click', function(e) {
 	if (! pmp.classList.contains('disabled')) {
+	    if (cncl.classList.contains('disabled')) {
+		save_state('pay');
+	    }
 	    var m = parseInt(document.getElementById('app_rms').innerHTML);
 	    var v = parseInt(pm.innerHTML);
 	    v++;
@@ -385,6 +424,9 @@ function setup_paying_buttons() {
     });
     pmp5.addEventListener('click', function(e) {
 	if (! pmp5.classList.contains('disabled')) {
+	    if (cncl.classList.contains('disabled')) {
+		save_state('pay');
+	    }
 	    var m = parseInt(document.getElementById('app_rms').innerHTML);
 	    var v = parseInt(pm.innerHTML);
 	    v += 5;
@@ -416,6 +458,9 @@ function setup_paying_buttons() {
     });
     psp.addEventListener('click', function(e) {
 	if (! psp.classList.contains('disabled')) {
+	    if (cncl.classList.contains('disabled')) {
+		save_state('pay');
+	    }
 	    var s = parseInt(document.getElementById('app_rss').innerHTML);
 	    var v = parseInt(ps.innerHTML);
 	    v++;
@@ -444,6 +489,9 @@ function setup_paying_buttons() {
     });
     ptp.addEventListener('click', function(e) {
 	if (! ptp.classList.contains('disabled')) {
+	    if (cncl.classList.contains('disabled')) {
+		save_state('pay');
+	    }
 	    var t = parseInt(document.getElementById('app_rts').innerHTML);
 	    var v = parseInt(pt.innerHTML);
 	    v++;
@@ -481,6 +529,7 @@ function setup_paying_buttons() {
 		    document.getElementById('app_p' + r + 'v').innerHTML = 0;
 		}
 	    }
+	    save_state(e.target.id);  // update_total pops a state, so we save one it can pop.
 	    update_total();
 	    disable_all_resource_buttons();
 	    enable_all_resource_buttons();
@@ -500,30 +549,53 @@ function setup_generation_button() {
 
     next.addEventListener('click', function(e) {
 	if (! next.classList.contains('disabled')) {
+	    save_state(e.target.id);
 	    g.innerHTML = parseInt(g.innerHTML)+1;
+	    var h = document.getElementById('app_rhs');
+	    var e = document.getElementById('app_res');
+	    h.innerHTML = parseInt(h.innerHTML) + parseInt(e.innerHTML);
+	    e.innerHTML = 0;
+	    var tr = parseInt(document.getElementById('app_tr').innerHTML);
+	    var m = document.getElementById('app_rms');
+	    m.innerHTML = parseInt(m.innerHTML) + tr;
+	    var r;
+	    for (r of [ 'm', 's', 't', 'p', 'e', 'h']) {
+		var s = document.getElementById('app_r' + r + 's');
+		var p = parseInt(document.getElementById('app_r' + r + 'p').innerHTML);
+		s.innerHTML = parseInt(s.innerHTML) + p;
+	    }
+	    disable_all_resource_buttons();
+	    enable_all_resource_buttons();
+	    disable_paying_buttons();
+	    enable_paying_buttons();
 	}
-	var h = document.getElementById('app_rhs');
-	var e = document.getElementById('app_res');
-	h.innerHTML = parseInt(h.innerHTML) + parseInt(e.innerHTML);
-	e.innerHTML = 0;
-	var tr = parseInt(document.getElementById('app_tr').innerHTML);
-	var m = document.getElementById('app_rms');
-	m.innerHTML = parseInt(m.innerHTML) + tr;
-	var r;
-	for (r of [ 'm', 's', 't', 'p', 'e', 'h']) {
-	    var s = document.getElementById('app_r' + r + 's');
-	    var p = parseInt(document.getElementById('app_r' + r + 'p').innerHTML);
-	    s.innerHTML = parseInt(s.innerHTML) + p;
-	}
-	disable_all_resource_buttons();
-	enable_all_resource_buttons();
-	disable_paying_buttons();
-	enable_paying_buttons();
     });
 }
 
 
-function activate_popup() {
+function activate_popup(x, yes_function, no_function) {
+    popup_text = document.getElementById('popup_text');
+    for (child of popup_text.children) {
+	if (child.id.startsWith('popup_text_')) {
+	    if (child.id.substr(11) == x) {
+		child.style.display = 'inline';
+	    } else {
+		child.style.display = 'none';
+	    }
+	}
+    }
+    popup_yes = document.getElementById('popup_yes');
+    if (yes_function === undefined) {
+	delete popup_yes.yes_function;
+    } else {
+	popup_yes.yes_function = yes_function;
+    }
+    popup_no = document.getElementById('popup_no');
+    if (no_function === undefined) {
+	delete popup_no.no_function;
+    } else {
+	popup_no.no_function = no_function;
+    }
     document.getElementById('popup').style.display = 'block';
 }
 
@@ -534,6 +606,9 @@ function deactivate_popup() {
 
 
 function reset() {
+    if (states.length > 0) {
+	save_state('reset');
+    }
     document.getElementById('app_rmp').innerHTML = 1;
     document.getElementById('app_rms').innerHTML = 30;
     document.getElementById('app_rsp').innerHTML = 1;
@@ -566,14 +641,28 @@ function reset() {
 
 function setup_popup() {
     document.getElementById('popup_no').addEventListener('click', function(e) {
+	if (e.target.hasOwnProperty('no_function')) {
+	    e.target.no_function();
+	    delete e.target.no_function;
+	}
 	deactivate_popup();
     });
     document.getElementById('popup_yes').addEventListener('click', function(e) {
-	reset();
+	if (e.target.hasOwnProperty('yes_function')) {
+	    e.target.yes_function();
+	    delete e.target.yes_function;
+	}
 	deactivate_popup();
     });
     document.getElementById('app_reset').addEventListener('click', function(e) {
-	activate_popup();
+	if (! e.target.classList.contains('disabled')) {
+	    activate_popup('reset', reset);
+	}
+    });
+    document.getElementById('app_undo').addEventListener('click', function(e) {
+	if (! e.target.classList.contains('disabled')) {
+	    activate_popup('undo', undo);
+	}
     });
 }
 
