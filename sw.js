@@ -1,5 +1,5 @@
 // Files to cache
-var cacheName = 'Help_Terraforming_Mars-5';
+var cacheName = 'Help_Terraforming_Mars-6';
 var appShellFiles = [ './',
 		      'index.html',
 		      'app.js',

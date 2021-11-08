@@ -18,6 +18,9 @@ function save_state(id) {
 	for (x of document.getElementsByClassName('app_item')) {
 	    state[x.id] = x.innerHTML;
 	}
+	for (x of document.getElementsByClassName('app_button')) {
+	    state[x.id] = x.classList.contains('disabled');
+	}
 	states.push(state);
 	document.getElementById('app_undo').classList.remove('disabled');
     }
@@ -31,7 +34,16 @@ function undo() {
 	    var state = states.pop();
 	    last_ids.pop();
 	    for (id in state) {
-		document.getElementById(id).innerHTML = state[id];
+		x = document.getElementById(id);
+		if (x.classList.contains('app_item')) {
+		    x.innerHTML = state[id];
+		} else if (x.classList.contains('app_button')) {
+		    if (state[id]) {
+			x.classList.add('disabled');
+		    } else {
+			x.classList.remove('disabled');
+		    }
+		}
 	    }
 	    if (states.length == 0) {
 		u.classList.add('disabled');
