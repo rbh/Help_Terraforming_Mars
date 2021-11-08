@@ -609,17 +609,17 @@ function reset() {
     if (states.length > 0) {
 	save_state('reset');
     }
-    document.getElementById('app_rmp').innerHTML = 1;
+    document.getElementById('app_rmp').innerHTML = 0;
     document.getElementById('app_rms').innerHTML = 30;
-    document.getElementById('app_rsp').innerHTML = 1;
+    document.getElementById('app_rsp').innerHTML = 0;
     document.getElementById('app_rss').innerHTML = 0;
-    document.getElementById('app_rtp').innerHTML = 1;
+    document.getElementById('app_rtp').innerHTML = 0;
     document.getElementById('app_rts').innerHTML = 0;
-    document.getElementById('app_rpp').innerHTML = 1;
+    document.getElementById('app_rpp').innerHTML = 0;
     document.getElementById('app_rps').innerHTML = 0;
-    document.getElementById('app_rep').innerHTML = 1;
+    document.getElementById('app_rep').innerHTML = 0;
     document.getElementById('app_res').innerHTML = 0;
-    document.getElementById('app_rhp').innerHTML = 1;
+    document.getElementById('app_rhp').innerHTML = 0;
     document.getElementById('app_rhs').innerHTML = 0;
     document.getElementById('app_tr').innerHTML = 20;
     document.getElementById('app_g').innerHTML = 1;
