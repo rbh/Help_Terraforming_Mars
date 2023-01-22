@@ -25,7 +25,7 @@ body {
     grid-template-columns: repeat(6, 1fr) 0.4fr repeat(5,1fr);
     grid-template-rows: repeat(15, 1fr);
     grid-template-areas:
-        'undo  title title title title title title title title title title reset'
+        'undo  log   title title title title title title title title title reset'
 	'.     .     .     prod  prod  prod  .     sup   sup   sup   sup   sup  '
 	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5'
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5'
@@ -46,7 +46,7 @@ body {
     grid-template-columns: repeat(6, 1fr) 0.4fr repeat(5, 1fr) 0.4fr repeat(7, 1fr);
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas:
-        'undo  title title title title title title title title title title title title title title title title title title reset'
+        'undo  log   title title title title title title title title title title title title title title title title title reset'
 	'.     .     .     prod  prod  prod  .     sup   sup   sup   sup   sup   .     pay   pay   pay   pay   pay   pay   pay  '
 	'rm    rm    rm    rmpm  rmp   rmpp  .     rmsm5 rmsm  rms   rmsp  rmsp5 .     .     .     pmm5  pmm   pm    pmp   pmp5 '
 	'rs    rs    rs    rspm  rsp   rspp  .     rssm5 rssm  rss   rssp  rssp5 .     psm   ps    psp   psx   psv   .     .    '
@@ -96,12 +96,21 @@ body {
     grid-area: undo;
     background-color: #0000bf;
     color: rgba(128, 128, 128, 1);
+    font-size: 80%;
+}
+
+#app_log {
+    grid-area: log;
+    background-color: #0000bf;
+    color: rgba(128, 128, 128, 1);
+    font-size: 80%;
 }
 
 #app_reset {
     grid-area: reset;
     background-color: #0000bf;
     color: rgba(128, 128, 128, 1);
+    font-size: 80%;
 }
 
 #app_prod { grid-area: prod; }
@@ -193,7 +202,7 @@ body {
 #app_ok { grid-area: ok; }
 
 
-#popup {
+#yes_no {
     position: fixed;
     left: 0px;
     width: 100%;
@@ -204,7 +213,7 @@ body {
 }
 
 
-#popup_box {
+#yes_no_box {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -218,19 +227,19 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-template-areas:
-        'popup_text popup_text popup_text'
-	'.          .          .         '
-	'popup_no   .          popup_yes ';
+        'yes_no_text yes_no_text yes_no_text'
+	'.           .           .         '
+	'yes_no_no   .           yes_no_yes ';
 }
 
-#popup_text {
+#yes_no_text {
     display: flex;
-    grid-area: popup_text;
+    grid-area: yes_no_text;
 }
 
-#popup_no {
+#yes_no_no {
     display: flex;
-    grid-area: popup_no;
+    grid-area: yes_no_no;
     border: 1px solid #000000;
     justify-content: center;
     align-items: center;
@@ -238,12 +247,37 @@ body {
     padding: 1em;
 }
 
-#popup_yes {
+#yes_no_yes {
     display: flex;
-    grid-area: popup_yes;
+    grid-area: yes_no_yes;
     border: 1px solid #000000;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 1em;
+}
+
+#big_popup {
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    top: 0px;
+    height: 100%;
+    background: rgba(255,255,255,0.75);
+    display: none;
+}
+
+#big_popup_box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%,-50%);
+    background: #ffffff;
+    color: #000000;
+    padding: 1em;
+    border: 1px solid #000000;
+    display: block;
+    overflow-y: auto;
 }

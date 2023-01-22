@@ -31,6 +31,7 @@
   </head>
   <body>
     <div class='app_item disabled'   id='app_undo' >Undo</div>
+    <div class='app_item'            id='app_log'  >Log</div>
     <div class='app_item'            id='app_title'>Help Terraforming Mars</div>
     <div class='app_item'            id='app_reset'>Reset</div>
     <div class='app_item'            id='app_prod' >Production</div>
@@ -119,18 +120,26 @@
     <div class='app_button disabled' id='app_cncl' >Cancel</div>
     <div class='app_item'            id='app_pto'  >0</div>
     <div class='app_button disabled' id='app_ok'   >Ok</div>
-    <div id='popup'>
-      <div id='popup_box'>
-	<div id='popup_text'>
-	  <span id='popup_text_reset'>
+    <div id='yes_no'>
+      <div id='yes_no_box'>
+	<div id='yes_no_text'>
+	  <span id='yes_no_text_reset'>
 	    Are you sure you want to reset?
 	  </span>
-	  <span id='popup_text_undo'>
+	  <span id='yes_no_text_undo'>
 	    Are you sure you want to undo?
 	  </span>
 	</div>
-	<div id='popup_no'>No</div>
-	<div id='popup_yes'>Yes</div>
+	<div id='yes_no_no'>No</div>
+	<div id='yes_no_yes'>Yes</div>
+      </div>
+    </div>
+    <div id='big_popup'>
+      <div id='big_popup_box'>
+	<div id='big_popup_text'>
+	  <div class='app_item' id='big_popup_text_log'>
+	  </div>
+	</div>
       </div>
     </div>
   </body>
