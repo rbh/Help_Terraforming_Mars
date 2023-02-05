@@ -65,6 +65,15 @@ body {
     color: rgba(0, 0, 0, 1);
 }
 
+.app_itembutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 1);
+    touch-action: manipulation;
+}
+
 .app_button {
     display: flex;
     justify-content: center;
@@ -202,7 +211,7 @@ body {
 #app_ok { grid-area: ok; }
 
 
-#yes_no {
+#popup {
     position: fixed;
     left: 0px;
     width: 100%;
@@ -212,8 +221,7 @@ body {
     display: none;
 }
 
-
-#yes_no_box {
+#popup_box {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -227,34 +235,47 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-template-areas:
-        'yes_no_text yes_no_text yes_no_text'
-	'.           .           .         '
-	'yes_no_no   .           yes_no_yes ';
+        'popup_box_text  popup_box_text    popup_box_text '
+	'.               .                 .              '
+	'popup_box_left  popup_box_middle  popup_box_right';
 }
 
-#yes_no_text {
+#popup_box_text {
     display: flex;
-    grid-area: yes_no_text;
+    grid-area: popup_box_text;
 }
 
-#yes_no_no {
+#popup_box_left {
     display: flex;
-    grid-area: yes_no_no;
+    grid-area: popup_box_left;
     border: 1px solid #000000;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 1em;
+    padding: 0.5em;
+    margin: 0.5em;
 }
 
-#yes_no_yes {
+#popup_box_middle {
     display: flex;
-    grid-area: yes_no_yes;
+    grid-area: popup_box_middle;
     border: 1px solid #000000;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 1em;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+#popup_box_right {
+    display: flex;
+    grid-area: popup_box_right;
+    border: 1px solid #000000;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em;
+    margin: 0.5em;
 }
 
 #big_popup {

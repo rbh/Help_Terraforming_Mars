@@ -12,10 +12,13 @@ var states = [];
 var last_ids = [];
 
 function save_state(id) {
-    if (last_ids.length == 0 || id != last_ids[last_ids.length-1]) {
+    if (id === null || last_ids.length == 0 || id != last_ids[last_ids.length-1]) {
 	last_ids.push(id);
 	let state = {};
 	for (x of document.getElementsByClassName('app_item')) {
+	    state[x.id] = x.innerHTML;
+	}
+	for (x of document.getElementsByClassName('app_itembutton')) {
 	    state[x.id] = x.innerHTML;
 	}
 	for (x of document.getElementsByClassName('app_button')) {
@@ -23,32 +26,6 @@ function save_state(id) {
 	}
 	states.push(state);
 	document.getElementById('app_undo').classList.remove('disabled');
-    }
-}
-
-
-function undo() {
-    let u = document.getElementById('app_undo');  // Undo button
-    if (! u.classList.contains('disabled')) {
-	if (states.length > 0) {
-	    let state = states.pop();
-	    last_ids.pop();
-	    for (id in state) {
-		x = document.getElementById(id);
-		if (x.classList.contains('app_item')) {
-		    x.innerHTML = state[id];
-		} else if (x.classList.contains('app_button')) {
-		    if (state[id]) {
-			x.classList.add('disabled');
-		    } else {
-			x.classList.remove('disabled');
-		    }
-		}
-	    }
-	    if (states.length == 0) {
-		u.classList.add('disabled');
-	    }
-	}
     }
 }
 
@@ -137,6 +114,19 @@ function enable_all_resource_buttons() {
     }
 }
 
+
+function disable_value_buttons() {
+    document.getElementById('app_psx').classList.add('disabled')
+    document.getElementById('app_ptx').classList.add('disabled')
+}
+
+
+function enable_value_buttons() {
+    document.getElementById('app_psx').classList.remove('disabled')
+    document.getElementById('app_ptx').classList.remove('disabled')
+}
+
+
 function log_change(what, from, to) {
     let log = document.getElementById('big_popup_text_log');
     let l = log.children.length;
@@ -223,7 +213,7 @@ function setup_resource_buttons(r, minimum=0) {
     
     pp.addEventListener('click', function(e) {
 	if (! pp.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(p.innerHTML);
 	    log_change(n + ' production', v, v+1);
 	    v++;
@@ -233,7 +223,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     pm.addEventListener('click', function(e) {
 	if (! pm.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(p.innerHTML);
 	    log_change(n + ' production', v, v-1);
 	    v--;
@@ -245,7 +235,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sp.addEventListener('click', function(e) {
 	if (! sp.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(s.innerHTML);
 	    log_change(n + ' supply', v, v+1);
 	    v++;
@@ -259,7 +249,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sp5.addEventListener('click', function(e) {
 	if (! sp5.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(s.innerHTML);
 	    log_change(n + ' supply', v, v+5);
 	    v += 5;
@@ -271,7 +261,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sm.addEventListener('click', function(e) {
 	if (! sm.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(s.innerHTML);
 	    log_change(n + ' supply', v, v-1);
 	    v--;
@@ -287,7 +277,7 @@ function setup_resource_buttons(r, minimum=0) {
     });
     sm5.addEventListener('click', function(e) {
 	if (! sm5.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(s.innerHTML);
 	    log_change(n + ' supply', v, v-5);
 	    v -= 5;
@@ -331,7 +321,7 @@ function setup_terraforming_rating_buttons() {
 
     trm.addEventListener('click', function(e) {
 	if (! trm.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(tr.innerHTML);
 	    log_change('terraforming rating', v, v-1);
 	    v--;
@@ -343,7 +333,7 @@ function setup_terraforming_rating_buttons() {
     });
     trp.addEventListener('click', function(e) {
 	if (! trp.classList.contains('disabled')) {
-	    save_state(e.target.id);
+	    save_state(e.currentTarget.id);
 	    let v = parseInt(tr.innerHTML);
 	    log_change('terraforming rating', v, v+1);
 	    v++;
@@ -408,6 +398,7 @@ function setup_paying_buttons() {
 	pto.innerHTML = total;
 	if (total == 0) {
 	    enable_all_resource_buttons();
+	    enable_value_buttons();
 	    enable_terraforming_rating_buttons();
 	    cncl.classList.add('disabled');
 	    ok.classList.add('disabled');
@@ -418,12 +409,14 @@ function setup_paying_buttons() {
 	    }
 	} else {
 	    disable_all_resource_buttons();
+	    disable_value_buttons();
 	    disable_terraforming_rating_buttons();
 	    cncl.classList.remove('disabled');
 	    ok.classList.remove('disabled');
 	    next.classList.add('disabled');
 	    u.classList.add('disabled');
 	}
+	return total;
     };
     
     pmm5.addEventListener('click', function(e) {
@@ -516,7 +509,7 @@ function setup_paying_buttons() {
 		psm.classList.add('disabled');
 	    }
 	    ps.innerHTML = v;
-	    psv.innerHTML = 2*v;
+	    psv.innerHTML = parseInt(document.getElementById('app_psx').innerHTML.substr(1))*v;
 	    update_total();
 	}
     });
@@ -533,7 +526,7 @@ function setup_paying_buttons() {
 		psp.classList.add('disabled');
 	    }
 	    ps.innerHTML = v;
-	    psv.innerHTML = 2*v;
+	    psv.innerHTML = parseInt(document.getElementById('app_psx').innerHTML.substr(1))*v;
 	    update_total();
 	}
     });
@@ -547,7 +540,7 @@ function setup_paying_buttons() {
 		ptm.classList.add('disabled');
 	    }
 	    pt.innerHTML = v;
-	    ptv.innerHTML = 3*v;
+	    ptv.innerHTML = parseInt(document.getElementById('app_ptx').innerHTML.substr(1))*v;
 	    update_total();
 	}
     });
@@ -564,7 +557,7 @@ function setup_paying_buttons() {
 		ptp.classList.add('disabled');
 	    }
 	    pt.innerHTML = v;
-	    ptv.innerHTML = 3*v;
+	    ptv.innerHTML = parseInt(document.getElementById('app_ptx').innerHTML.substr(1))*v;
 	    update_total();
 	}
     });
@@ -584,6 +577,14 @@ function setup_paying_buttons() {
     ok.addEventListener('click', function(e) {
 	if (! ok.classList.contains('disabled')) {
 	    let l = [];
+	    let has_steel_or_titanium = false;
+	    let total = parseInt(document.getElementById('app_pto').innerHTML);
+	    let total_str;
+	    if (total != 1) {
+		total_str = total + ' megacredits';
+	    } else {
+		total_str = '1 megacredit';
+	    }
 	    for (let r of [ 'm', 's', 't' ]) {
 		let s = document.getElementById('app_r' + r + 's');
 		let p = document.getElementById('app_p' + r);
@@ -595,23 +596,33 @@ function setup_paying_buttons() {
 		}
 		if (v != 0) {
 		    if (r == 'm') {
-			l.push(v + ' megacredits');
+			if (v != 1) {
+			    l.push(v + ' megacredits');
+			} else {
+			    l.push('1 megacredit');
+			}
 		    } else if (r == 's') {
 			l.push(v + ' steel');
+			has_steel_or_titanium = true;
 		    } else if (r == 't') {
 			l.push(v + ' titanium')
+			has_steel_or_titanium = true;
 		    }
 		}
 	    }
-	    if (l.length == 1) {
-		log_event('Purchase for ' + l[0]);
-	    } else if (l.length == 2) {
-		log_event('Purchase for ' + l[0] + ' and ' + l[1]);
-	    } else {
-		log_event('Purchase for ' + l[0] + ', ' + l[1] + ', and ' + l[2]);
-	    }
-	    save_state(e.target.id);  // update_total pops a state, so we save one it can pop.
+	    save_state(e.currentTarget.id);  // update_total pops a state, so we save one it can pop.
 	    update_total();
+	    if (l.length == 1) {
+		if (has_steel_or_titanium) {
+		    log_event('Purchase for ' + l[0] + ' with a total value of ' + total_str);
+		} else {
+		    log_event('Purchase for ' + l[0]);
+		}
+	    } else if (l.length == 2) {
+		log_event('Purchase for ' + l[0] + ' and ' + l[1] + ' with a total value of ' + total_str);
+	    } else {
+		log_event('Purchase for ' + l[0] + ', ' + l[1] + ', and ' + l[2] + ' with a total value of ' + total_str);
+	    }
 	    disable_all_resource_buttons();
 	    enable_all_resource_buttons();
 	    disable_paying_buttons();
@@ -630,7 +641,7 @@ function setup_generation_button() {
 
     next.addEventListener('click', function(ev) {
 	if (! next.classList.contains('disabled')) {
-	    save_state(ev.target.id);
+	    save_state(ev.currentTarget.id);
 	    let gen = parseInt(g.innerHTML)+1
 	    g.innerHTML = gen;
 	    log_event('Advance to generation ' + gen);
@@ -655,30 +666,178 @@ function setup_generation_button() {
 }
 
 
-function activate_yes_no(x, yes_function, no_function) {
-    yes_no_text = document.getElementById('yes_no_text');
-    for (child of yes_no_text.children) {
-	if (child.id.startsWith('yes_no_text_')) {
-	    if (child.id.substr(12) == x) {
-		child.style.display = 'inline';
-	    } else {
-		child.style.display = 'none';
+function popup_box_right_undo(e) {
+    let u = document.getElementById('app_undo');  // Undo button
+    if (! u.classList.contains('disabled')) {
+	if (states.length > 0) {
+	    let state = states.pop();
+	    last_ids.pop();
+	    for (id in state) {
+		x = document.getElementById(id);
+		if (x.classList.contains('app_item') || x.classList.contains('app_itembutton')) {
+		    x.innerHTML = state[id];
+		} else if (x.classList.contains('app_button')) {
+		    if (state[id]) {
+			x.classList.add('disabled');
+		    } else {
+			x.classList.remove('disabled');
+		    }
+		}
+	    }
+	    if (states.length == 0) {
+		u.classList.add('disabled');
 	    }
 	}
     }
-    yes_no_yes = document.getElementById('yes_no_yes');
-    if (yes_function === undefined) {
-	delete yes_no_yes.yes_function;
-    } else {
-	yes_no_yes.yes_function = yes_function;
+}
+
+
+function popup_box_right_reset(e) {
+    if (states.length > 0) {
+	save_state('reset');
     }
-    yes_no_no = document.getElementById('yes_no_no');
-    if (no_function === undefined) {
-	delete yes_no_no.no_function;
-    } else {
-	yes_no_no.no_function = no_function;
+    log_event('Reset');
+    document.getElementById('app_rmp').innerHTML = 0;
+    document.getElementById('app_rms').innerHTML = 30;
+    document.getElementById('app_rsp').innerHTML = 0;
+    document.getElementById('app_rss').innerHTML = 0;
+    document.getElementById('app_rtp').innerHTML = 0;
+    document.getElementById('app_rts').innerHTML = 0;
+    document.getElementById('app_rpp').innerHTML = 0;
+    document.getElementById('app_rps').innerHTML = 0;
+    document.getElementById('app_rep').innerHTML = 0;
+    document.getElementById('app_res').innerHTML = 0;
+    document.getElementById('app_rhp').innerHTML = 0;
+    document.getElementById('app_rhs').innerHTML = 0;
+    document.getElementById('app_tr').innerHTML = 20;
+    document.getElementById('app_g').innerHTML = 1;
+    document.getElementById('app_pm').innerHTML = 0;
+    document.getElementById('app_ps').innerHTML = 0;
+    document.getElementById('app_psv').innerHTML = 0;
+    document.getElementById('app_psx').innerHTML = '×2';
+    document.getElementById('app_pt').innerHTML = 0;
+    document.getElementById('app_ptv').innerHTML = 0;
+    document.getElementById('app_ptx').innerHTML = '×3';
+    document.getElementById('app_pto').innerHTML = 0;
+    document.getElementById('app_next').classList.remove('disabled');
+    disable_all_resource_buttons();
+    enable_all_resource_buttons();
+    disable_paying_buttons();
+    enable_paying_buttons();
+    disable_terraforming_rating_buttons();
+    enable_terraforming_rating_buttons();
+}
+
+function change_value(id, name, value) {
+    let elem = document.getElementById(id);
+    old = parseInt(elem.innerHTML.substr(1))
+    if (old != value) {
+	save_state(null);
+	log_change(name + ' value', old, value);
+	elem.innerHTML = '×' + value;
     }
-    document.getElementById('yes_no').style.display = 'block';
+}
+
+
+function popup_box_left_steel_value(e) {
+    change_value('app_psx', 'steel', 2);
+}
+
+
+function popup_box_right_steel_value(e) {
+    change_value('app_psx', 'steel', 3);
+}
+
+
+function popup_box_left_titanium_value(e) {
+    change_value('app_ptx', 'titanium', 3);
+}
+
+
+function popup_box_middle_titanium_value(e) {
+    change_value('app_ptx', 'titanium', 4);
+}
+
+
+function popup_box_right_titanium_value(e) {
+    change_value('app_ptx', 'titanium', 5);
+}
+
+
+function popup_click(e) {
+    deactivate_popup();
+    let elem = e.currentTarget
+    if (! elem.classList.contains('disabled')) {
+	for (let child of elem.children) {
+	    if (child.style.display == 'inline') {
+		if (window.hasOwnProperty(child.id)) {
+		    console.log(child.id);
+		    window[child.id](e);
+		    break
+		}
+	    }
+	}
+    }
+}
+
+
+function setup_popup() {
+    // Reset
+    document.getElementById('app_reset').addEventListener('click', function(e) {
+	if (! e.currentTarget.classList.contains('disabled')) {
+	    activate_popup('reset');
+	}
+    });
+    // Undo
+    document.getElementById('app_undo').addEventListener('click', function(e) {
+	if (! e.currentTarget.classList.contains('disabled')) {
+	    activate_popup('undo');
+	}
+    });
+    // Steel value
+    document.getElementById('app_psx').addEventListener('click', function(e) {
+	if (! e.currentTarget.classList.contains('disabled')) {
+	    activate_popup('steel_value');
+	}
+    });
+    // Titanium value
+    document.getElementById('app_ptx').addEventListener('click', function(e) {
+	if (! e.currentTarget.classList.contains('disabled')) {
+	    activate_popup('titanium_value');
+	}
+    });
+    // Generic buttons
+    document.getElementById('popup_box_left').addEventListener('click', popup_click);
+    document.getElementById('popup_box_middle').addEventListener('click', popup_click);
+    document.getElementById('popup_box_right').addEventListener('click', popup_click);
+}
+
+
+function activate_popup(what) {
+    let popup_box = document.getElementById('popup_box');
+    for (elem of popup_box.children) {
+	if (elem.id.startsWith('popup_box_')) {
+	    let child_id_prefix = elem.id + '_';
+	    let elem_display = 'none';
+	    for (child of elem.children) {
+		if (child.id.startsWith(child_id_prefix)) {
+		    if (child.id.substr(child_id_prefix.length) == what) {
+			child.style.display = 'inline';
+			elem_display = 'inline';
+		    } else {
+			child.style.display = 'none';
+		    }
+		}
+	    }
+	    elem.style.display = elem_display;
+	}
+    }
+    document.getElementById('popup').style.display='block';
+}
+
+
+function deactivate_popup() {
+    document.getElementById('popup').style.display = 'none';
 }
 
 
@@ -699,81 +858,14 @@ function activate_big_popup(x) {
 }
 
 
-function deactivate_yes_no() {
-    document.getElementById('yes_no').style.display = 'none';
-}
-
-
 function deactivate_big_popup() {
     document.getElementById('big_popup').style.display = 'none';
 }
 
 
-function reset() {
-    if (states.length > 0) {
-	save_state('reset');
-    }
-    document.getElementById('app_rmp').innerHTML = 0;
-    document.getElementById('app_rms').innerHTML = 30;
-    document.getElementById('app_rsp').innerHTML = 0;
-    document.getElementById('app_rss').innerHTML = 0;
-    document.getElementById('app_rtp').innerHTML = 0;
-    document.getElementById('app_rts').innerHTML = 0;
-    document.getElementById('app_rpp').innerHTML = 0;
-    document.getElementById('app_rps').innerHTML = 0;
-    document.getElementById('app_rep').innerHTML = 0;
-    document.getElementById('app_res').innerHTML = 0;
-    document.getElementById('app_rhp').innerHTML = 0;
-    document.getElementById('app_rhs').innerHTML = 0;
-    document.getElementById('app_tr').innerHTML = 20;
-    document.getElementById('app_g').innerHTML = 1;
-    document.getElementById('app_pm').innerHTML = 0;
-    document.getElementById('app_ps').innerHTML = 0;
-    document.getElementById('app_psv').innerHTML = 0;
-    document.getElementById('app_pt').innerHTML = 0;
-    document.getElementById('app_ptv').innerHTML = 0;
-    document.getElementById('app_pto').innerHTML = 0;
-    document.getElementById('app_next').classList.remove('disabled');
-    disable_all_resource_buttons();
-    enable_all_resource_buttons();
-    disable_paying_buttons();
-    enable_paying_buttons();
-    disable_terraforming_rating_buttons();
-    enable_terraforming_rating_buttons();
-}
-
-
-function setup_yes_no() {
-    document.getElementById('yes_no_no').addEventListener('click', function(e) {
-	if (e.target.hasOwnProperty('no_function')) {
-	    e.target.no_function();
-	    delete e.target.no_function;
-	}
-	deactivate_yes_no();
-    });
-    document.getElementById('yes_no_yes').addEventListener('click', function(e) {
-	if (e.target.hasOwnProperty('yes_function')) {
-	    e.target.yes_function();
-	    delete e.target.yes_function;
-	}
-	deactivate_yes_no();
-    });
-    document.getElementById('app_reset').addEventListener('click', function(e) {
-	if (! e.target.classList.contains('disabled')) {
-	    activate_yes_no('reset', reset);
-	}
-    });
-    document.getElementById('app_undo').addEventListener('click', function(e) {
-	if (! e.target.classList.contains('disabled')) {
-	    activate_yes_no('undo', undo);
-	}
-    });
-}
-
-
 function setup_big_popup() {
     document.getElementById('app_log').addEventListener('click', function(e) {
-	if (! e.target.classList.contains('disabled')) {
+	if (! e.currentTarget.classList.contains('disabled')) {
 	    activate_big_popup('log');
 	}
     });
@@ -797,6 +889,6 @@ setup_terraforming_rating_buttons();
 
 setup_generation_button();
 
-setup_yes_no();
+setup_popup();
 
 setup_big_popup();
